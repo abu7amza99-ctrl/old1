@@ -1,0 +1,118 @@
+:root{
+  --header:#6a11cb;
+  --text:#222;
+  --bg:#f9f9fb;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Cairo",sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;background-size:cover;background-position:center}
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:var(--header);color:#fff;position:sticky;top:0;z-index:60}
+.topbar .logo{font-size:1.2rem;font-weight:600;margin:0 auto}
+.icon-btn{background:none;border:0;color:inherit;font-size:1.2rem;cursor:pointer}
+.search-section{display:block;padding:12px;text-align:center;background:transparent}
+#searchInput{width:86%;max-width:680px;padding:10px 12px;border-radius:999px;border:1px solid #ddd;box-shadow:0 2px 10px rgba(0,0,0,0.04)}
+.app{display:flex;min-height:calc(100vh - 120px)}
+.sidebar{width:300px;background:#fff;padding:20px;border-left:1px solid #eee;transform:translateX(100%);transition:transform .28s ease;box-shadow:-6px 0 18px rgba(0,0,0,0.08);position:relative;z-index:80;border-radius:0 12px 12px 0}
+.sidebar[aria-hidden="true"]{transform:translateX(100%)}
+.sidebar[aria-hidden="false"]{transform:translateX(0)}
+.sidebar h3{margin-top:0;font-size:1.4rem}
+#sectionsList{list-style:none;padding:0;margin:12px 0 0 0}
+#sectionsList li{padding:10px;border-radius:8px;cursor:pointer;font-size:1.05rem}
+#sectionsList li:hover{background:#f5f5f7}
+.close-sidebar{position:absolute;left:14px;top:12px;background:transparent;border:0;font-size:20px;cursor:pointer}
+.main{flex:1;padding:18px;min-height:60vh}
+.placeholder{text-align:center;color:#777;padding:40px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px;margin-top:10px}
+.card{background:#fff;border-radius:12px;padding:10px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,0.06);cursor:pointer}
+.card img{width:100%;height:auto;border-radius:8px;display:block}
+
+/* Modal base */
+.modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.45);z-index:200;opacity:1}
+.modal[aria-hidden="true"]{display:none}
+
+/* admin modern panel */
+.modal.modern-admin{backdrop-filter:blur(6px);background:rgba(0,0,0,0.55);align-items:flex-start;padding-top:12px;padding-bottom:12px}
+/* IMPORTANT: show only when aria-hidden="false" */
+.modal.modern-admin[aria-hidden="true"]{display:none}
+.modal.modern-admin[aria-hidden="false"]{display:flex;align-items:flex-start;justify-content:flex-end;padding:12px}
+
+/* panel card style */
+.modal-card{background:#fff;border-radius:16px;padding:18px;max-width:920px;width:94%;position:relative;max-height:90vh;overflow:auto}
+.modal-card.small{max-width:420px}
+.modal-card.lg{max-width:920px}
+.close{position:absolute;right:14px;top:12px;background:transparent;border:0;font-size:18px;cursor:pointer;z-index:10}
+.btn{padding:8px 12px;border-radius:8px;border:0;cursor:pointer}
+.btn.primary{background:var(--header);color:#fff}
+.btn.secondary{background:#f1f1f3;color:#333}
+.btn.danger{background:#e53935;color:#fff}
+.admin-row{display:flex;gap:16px;flex-wrap:wrap}
+.admin-row>div{flex:1;min-width:220px}
+.files-list{max-height:220px;overflow:auto;margin-top:8px}
+.files-list .file-row{display:flex;justify-content:space-between;align-items:center;padding:6px;border-radius:8px;background:#fafafa;margin-bottom:6px}
+.theme-preview{margin-top:8px;padding:10px;border-radius:8px;border:1px dashed #ccc;text-align:center;color:#555}
+.error{color:#c62828;margin-top:6px}
+.welcome{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#6a11cb,#2575fc);z-index:9999}
+.welcome-card{background:rgba(255,255,255,0.95);padding:22px;border-radius:12px;text-align:center;max-width:480px}
+.welcome-actions{display:flex;gap:10px;justify-content:center;margin-top:12px}
+.color-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:8px}
+.pass-change input{display:block;width:100%;margin-top:8px;padding:8px;border-radius:8px;border:1px solid #ddd}
+.admin-actions{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.sidebar-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:70}
+
+/* Side-panel specifics */
+.modal.modern-admin .modal-card {
+  position: relative;
+  width: 360px;
+  max-width: calc(100% - 28px);
+  height: auto;
+  max-height: calc(100vh - 40px);
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 12px 40px rgba(20,20,40,0.35);
+  background: linear-gradient(180deg,#fff,#fbfbff);
+  overflow:auto;
+  transition: all .18s ease;
+}
+.modal.modern-admin .close{
+  right:auto;
+  left:14px;
+  color:#444;
+  font-size:18px;
+}
+.modal.modern-admin h2.panel-title{
+  margin:0 0 10px 0;
+  font-size:18px;
+  color:var(--header);
+  text-align:center;
+}
+.modal.modern-admin .admin-row{display:flex;flex-direction:row;gap:12px;flex-wrap:wrap}
+.modal.modern-admin .admin-row>div{flex:1;min-width:180px;background:transparent;padding:6px;border-radius:8px}
+.modal.modern-admin input[type="text"],.modal.modern-admin input[type="password"],.modal.modern-admin select,.modal.modern-admin textarea{width:100%;padding:10px;border-radius:10px;border:1px solid #e6e6ee;margin-top:8px}
+.modal.modern-admin .btn{width:100%;padding:10px;border-radius:10px}
+.modal.modern-admin .btn + .btn{margin-top:8px}
+
+/* Section cards */
+.section-card{margin:12px 0;padding:14px;border-radius:12px;background:linear-gradient(180deg,#ffffff,#fbfbff);box-shadow:0 6px 20px rgba(0,0,0,0.04)}
+.section-title{font-size:1.4rem;color:var(--header);margin:0 0 10px 0;font-weight:700}
+
+/* preview box */
+.preview-box{
+  min-height:100px;border-radius:8px;border:1px dashed #ddd;background:transparent;padding:12px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;color:var(--text);
+  white-space:pre-wrap;text-align:center;position:relative;
+}
+
+/* rows */
+.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:8px}
+.actions-row{justify-content:flex-start;margin-top:12px}
+
+/* small screen tweaks */
+@media(max-width:900px){
+  .sidebar{position:fixed;right:0;top:0;height:100%;width:78%;max-width:360px;border-radius:0;box-shadow:-8px 0 30px rgba(0,0,0,0.12)}
+  .topbar .logo{font-size:1rem}
+  #searchInput{width:78%}
+  .modal.modern-admin{align-items:flex-start;justify-content:flex-end;padding:12px}
+  .modal.modern-admin .modal-card { width: 92%; max-width: 720px; right:8px; left:auto; top:auto; transform:none; }
+  .preview-box{font-size:1.2rem}
+}
+
+/* ensure images don't overflow within admin lists */
+.files-list img{max-width:56px;border-radius:6px}

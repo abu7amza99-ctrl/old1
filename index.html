@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>محترف التصميم</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- شاشة الترحيب -->
+  <div id="welcomeScreen" class="welcome" aria-hidden="false">
+    <div class="welcome-card">
+      <h1>🎨 أهلاً بك في <span>محترف التصميم</span></h1>
+      <p>ابدأ باكتشاف أقسامك وتصاميمك بسهولة.</p>
+      <div class="welcome-actions">
+        <button id="startBtn" class="btn primary">ابدأ</button>
+        <button id="skipBtn" class="btn secondary">تخطي</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- الشريط العلوي -->
+  <header class="topbar" role="banner">
+    <div class="left">
+      <button id="toggleSidebar" class="icon-btn" aria-label="قائمة">📂</button>
+      <h1 class="logo">محترف التصميم</h1>
+    </div>
+    <div class="right">
+      <button id="adminBtn" class="icon-btn" aria-label="لوحة التحكم">⚙️</button>
+    </div>
+  </header>
+
+  <!-- شريط البحث -->
+  <section class="search-section" id="searchSection">
+    <input id="searchInput" placeholder="ابحث عن قسم أو ملف... 🔍" />
+  </section>
+
+  <div class="app">
+    <!-- sidebar -->
+    <aside id="sidebar" class="sidebar" aria-hidden="true">
+      <button id="closeSidebarBtn" class="close-sidebar" aria-label="إغلاق">✖</button>
+      <h3>الأقسام</h3>
+      <ul id="sectionsList"></ul>
+    </aside>
+
+    <!-- المحتوى الرئيسي -->
+    <main id="main" class="main" data-current-section="">
+      <p class="placeholder">اختر قسماً من القائمة أو أضف جديداً من لوحة التحكم ✨</p>
+
+      <!-- fonts & decor wrapper (appended on demand / already in DOM but hidden) -->
+      <section id="fontsWrapper" style="display:none;">
+        <!-- الفصل الأول: الخطوط العربية -->
+        <div class="card section-card" id="arabicFontsCard" aria-hidden="true">
+          <h2 class="section-title">الخطوط العربية</h2>
+          <div class="section-body">
+            <label>اختر خطاً:</label>
+            <select id="arabicFontSelect"></select>
+
+            <label>أدخل النص لتجربته:</label>
+            <input id="arabicFontName" placeholder="أدخل الاسم أو النص..." />
+
+            <div class="row">
+              <div>
+                <label>لون الخط</label>
+                <input id="arabicColor" type="color" value="#000000" />
+              </div>
+              <div>
+                <label>أو اختر تدرج (بسيط)</label>
+                <input id="arabicGradientStart" type="color" value="#000000" />
+                <input id="arabicGradientEnd" type="color" value="#555555" />
+              </div>
+            </div>
+
+            <label>المعاينة (يمكن تنزيلها كصورة شفافة):</label>
+            <div id="arabicPreview" class="preview-box" role="img" aria-live="polite">ستظهر المعاينة هنا</div>
+
+            <div class="row actions-row">
+              <button id="arabicDownloadPreviewBtn" class="btn primary">🖼️ تنزيل صورة</button>
+              <a id="arabicDownloadFont" class="btn secondary" download>⬇️ تحميل الخط</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- الفصل الثاني: زخرفة الأسماء -->
+        <div class="card section-card" id="nameDecorCard" aria-hidden="true">
+          <h2 class="section-title">زخرفة الأسماء</h2>
+          <div class="section-body">
+            <label>اختر ستايل زخرفة:</label>
+            <select id="decorStyleSelect"></select>
+
+            <label>أدخل الاسم لتجربته:</label>
+            <input id="decorNameInput" placeholder="أدخل الاسم..." />
+
+            <label>المعاينة (اضغط طويل للنسخ أو استخدم زر النسخ):</label>
+            <div id="decorPreview" class="preview-box" role="img" aria-live="polite">ستظهر النتيجة هنا</div>
+
+            <div class="row actions-row">
+              <button id="decorCopyBtn" class="btn">📋 نسخ النص</button>
+              <button id="decorDownloadBtn" class="btn primary">🖼️ تنزيل كصورة</button>
+            </div>
+
+            <div style="margin-top:10px;">
+              <p class="theme-preview">أضف ستايلات زخرفة من لوحة التحكم — القائمة افتراضية فارغة كما طلبت.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- viewer modal -->
+  <div id="viewer" class="modal" aria-hidden="true">
+    <div class="modal-card">
+      <button id="closeViewer" class="close" aria-label="إغلاق">✖</button>
+      <h2 id="viewerTitle"></h2>
+      <div id="viewerBody"></div>
+      <div class="modal-actions">
+        <button id="downloadBtn" class="btn primary">⬇️ تحميل</button>
+        <button id="copyBtn" class="btn secondary">📋 نسخ الرابط</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- login modal (admin auth) -->
+  <div id="loginModal" class="modal" aria-hidden="true">
+    <div class="modal-card small">
+      <button id="closeLogin" class="close" aria-label="إغلاق">✖</button>
+      <h2>🔒 تسجيل الدخول</h2>
+      <input id="adminPassword" type="password" placeholder="أدخل كلمة المرور" />
+      <p id="loginError" class="error"></p>
+      <div class="modal-actions">
+        <button id="loginBtn" class="btn primary">دخول</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- admin modal (لوحة التحكم) - side panel -->
+  <div id="adminModal" class="modal modern-admin" aria-hidden="true">
+    <div class="modal-card lg" role="dialog" aria-modal="true" aria-label="لوحة التحكم">
+      <button id="closeAdmin" class="close" aria-label="إغلاق">✖</button>
+      <h2 class="panel-title">⚙️ لوحة التحكم</h2>
+
+      <!-- إدارة الأقسام -->
+      <section class="admin-row">
+        <div>
+          <h4>إضافة قسم</h4>
+          <input id="newSectionName" placeholder="اسم القسم الجديد" />
+          <button id="addSectionBtn" class="btn primary">➕ إضافة قسم</button>
+        </div>
+
+        <div>
+          <h4>إدارة الأقسام</h4>
+          <select id="editSectionSelect"></select>
+          <input id="renameSectionInput" placeholder="اسم جديد" />
+          <button id="renameSectionBtn" class="btn">✏️ إعادة تسمية</button>
+          <button id="deleteSectionBtn" class="btn danger">🗑 حذف القسم</button>
+        </div>
+      </section>
+
+      <hr />
+
+      <!-- ملفات القسم -->
+      <section class="admin-row">
+        <div>
+          <h4>إضافة ملف / صورة</h4>
+          <select id="fileSectionSelect"></select>
+          <input id="fileNameInput" placeholder="اسم الملف" />
+          <input id="fileUrlInput" placeholder="رابط الملف (اختياري)" />
+          <input id="fileUploadInput" type="file" accept="image/*,application/*" multiple />
+          <div style="margin-top:8px;display:flex;gap:8px;">
+            <button id="saveFileBtn" class="btn primary">💾 حفظ الملف(ـات)</button>
+            <button id="clearUploads" class="btn">مسح الملفات المحددة</button>
+          </div>
+          <div class="files-list" id="sectionFilesList" aria-live="polite"></div>
+        </div>
+
+        <div>
+          <h4>تصفية / تعديل ملفات</h4>
+          <select id="fileSectionFilter"></select>
+          <select id="fileEditSelect"></select>
+          <input id="editFileName" placeholder="اسم جديد للملف" />
+          <div style="display:flex;gap:8px;margin-top:8px;">
+            <button id="renameFileBtn" class="btn">✏️ إعادة تسمية</button>
+            <button id="deleteFileBtn" class="btn danger">🗑 حذف ملف</button>
+          </div>
+        </div>
+      </section>
+
+      <hr />
+
+      <!-- خطوط مزخرفة - إدارة الخطوط العربية -->
+      <section class="admin-row" id="fontsAdminSection">
+        <div>
+          <h4>إدارة الخطوط العربية</h4>
+          <input id="fontNameInput" placeholder="اسم الخط (مثلاً: خط الرقعة)" />
+          <input id="fontFileInput" type="file" accept=".ttf,.otf,.woff,.woff2" />
+          <div style="display:flex;gap:8px;margin-top:8px;">
+            <button id="addFontBtn" class="btn primary">➕ إضافة خط</button>
+            <button id="clearFontsBtn" class="btn">مسح كل الخطوط (محلي)</button>
+          </div>
+          <div class="files-list" id="fontsAdminList"></div>
+        </div>
+
+        <div>
+          <h4>إدارة ستايلات زخرفة الأسماء</h4>
+          <input id="decorNameInputAdmin" placeholder="اسم الستايل (مثلاً: زخرفة 1)" />
+          <input id="decorTemplateInput" placeholder="قالب بسيط (مثلاً: wrap:❈,❈ أو interleave:✦)" />
+          <div style="display:flex;gap:8px;margin-top:8px;">
+            <button id="addDecorBtn" class="btn primary">➕ إضافة ستايل</button>
+            <button id="clearDecorsBtn" class="btn">مسح كل الستايلات</button>
+          </div>
+          <div class="files-list" id="decorAdminList"></div>
+        </div>
+      </section>
+
+      <hr />
+
+      <!-- ثيم وألوان -->
+      <section class="admin-row">
+        <div>
+          <h4>ألوان الموقع (محسن)</h4>
+          <label>لون الهيدر</label>
+          <input id="headerColor" type="color" />
+          <label>لون النص</label>
+          <input id="textColor" type="color" />
+          <label>لون الخلفية</label>
+          <input id="bgColor" type="color" />
+          <div style="margin-top:8px;">
+            <label>تدرج للخلفية (اختياري)</label>
+            <input id="bgGradStart" type="color" />
+            <input id="bgGradEnd" type="color" />
+          </div>
+          <button id="saveColors" class="btn primary" style="margin-top:8px;">حفظ الألوان</button>
+        </div>
+
+        <div>
+          <h4>خلفية الصفحة</h4>
+          <input id="bgImageUrl" placeholder="رابط صورة الخلفية (اختياري)" />
+          <input id="bgImageUpload" type="file" accept="image/*" />
+          <div style="display:flex;gap:8px;margin-top:8px;">
+            <button id="saveBgImage" class="btn">تعيين الخلفية</button>
+            <button id="clearBgImage" class="btn">مسح الخلفية</button>
+          </div>
+        </div>
+      </section>
+
+      <hr />
+
+      <!-- تغيير كلمة المرور -->
+      <section class="admin-row">
+        <div style="width:100%">
+          <h4>تغيير كلمة مرور لوحة التحكم</h4>
+          <input id="oldPasswordInput" type="password" placeholder="كلمة المرور الحالية" />
+          <input id="newPasswordInput" type="password" placeholder="كلمة المرور الجديدة" />
+          <input id="confirmNewPasswordInput" type="password" placeholder="تأكيد كلمة المرور الجديدة" />
+          <button id="changePasswordBtn" class="btn primary" style="margin-top:8px;">تغيير كلمة المرور</button>
+          <p id="changePasswordMsg" class="error"></p>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
