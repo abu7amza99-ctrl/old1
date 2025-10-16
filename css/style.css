@@ -1,0 +1,42 @@
+/* CSS الأصلي */
+body {
+  margin: 0;
+  font-family: 'Reem Kufi', sans-serif;
+  background-image: url('assets/bg.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+/* الشريط العلوي */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 70px;
+  padding: 0 20px;
+  background-image: url('assets/shbg.png');
+  background-size: cover;
+  background-position: center;
+  border-bottom: 5px solid #D4AF37;
+  box-shadow: 0 6px 8px rgba(0,0,0,0.6);
+  position: relative;
+  border-radius: 0 0 15px 15px;
+}
+
+/* زر لوحة التحكم */
+#adminBtn {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+#adminBtn img {
+  display: block;
+}
+
+/* بقية CSS الأصلي كما هو */.files-list img{max-width:56px;border-radius:6px}
