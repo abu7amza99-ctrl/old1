@@ -3,99 +3,90 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>عالم التصاميم والزخرفة</title>
+  <title>لوحة التحكم</title>
   <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    body { font-family: 'Reem Kufi', sans-serif; background-color: #f5f5f5; margin: 0; padding: 20px; }
+    h1 { text-align: center; color: #D4AF37; }
+    section { background-color: white; border-radius: 10px; padding: 15px; margin: 20px auto; max-width: 700px; box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
+    input, button, textarea { margin: 5px 0; padding: 8px; width: 100%; border-radius: 5px; border: 1px solid #ccc; }
+    button { background-color: #D4AF37; border: none; color: #fff; font-weight: bold; cursor: pointer; }
+    button:hover { background-color: #b8962f; }
+
+    /* تنسيق تبويب قسم اتصل بنا */
+    .circle-admin { display: flex; flex-wrap: wrap; justify-content: space-around; margin-top: 10px; }
+    .circle-block { background-color: #fff; border-radius: 10px; padding: 10px; margin: 10px; width: 200px; box-shadow: 0 3px 6px rgba(0,0,0,0.2); text-align: left; }
+    .circle-block label { font-weight: bold; margin-top: 5px; display: block; }
+  </style>
 </head>
 <body>
-  <!-- الشريط العلوي -->
-  <header>
-    <div class="header-center">
-      <div class="app-title">عالم التصاميم والزخرفة</div>
-      <img src="assets/abu7amza.png" alt="شعار التطبيق" class="app-logo">
-    </div>
-    <button class="sidebar-btn">
-      <img src="assets/yhbg.png" alt="لوحة جانبية">
-    </button>
-    <!-- زر لوحة التحكم -->
-    <button id="adminBtn">
-      <img src="assets/siting.png" alt="لوحة التحكم">
-    </button>
-  </header>
+  <h1>لوحة التحكم</h1>
 
-  <!-- اللوحة الجانبية -->
-  <aside class="sidebar">
-    <button class="close-btn">&times;</button>
-    <ul class="sidebar-menu">
-      <li><a href="index.html">الصفحة الرئيسية</a></li>
-      <li><a href="professional-decoration.html">الزخرفة الاحترافية</a></li>
-      <li><a href="name-decoration.html">زخرفة الأسماء</a></li>
-      <li><a href="about.html">لمحة عن التطبيق</a></li>
-      <li><a href="contact.html">اتصل بنا</a></li>
-    </ul>
-  </aside>
+  <section>
+    <h2>الصفحة الرئيسية</h2>
+    <p>إضافة أكثر من 20 صورة لتظهر في الصفحة الرئيسية</p>
+    <input type="file" multiple>
+    <button>رفع الصور</button>
+  </section>
 
-  <main>
-    <h1>مرحبًا بك في عالم التصاميم والزخرفة</h1>
-    <p>استخدم القائمة الجانبية للتنقل بين الأقسام المختلفة.</p>
-  </main>
+  <section>
+    <h2>زخرفة الاحترافية</h2>
+    <p>إضافة خطوط أو تلبيس لكل تصميم</p>
+    <input type="text" placeholder="اسم الخط">
+    <button>إضافة خط</button>
+    <input type="file">
+    <button>إضافة تلبيس</button>
+  </section>
 
-  <!-- التبويب الذهبي للوحة التحكم -->
-  <div id="adminModal" class="admin-modal">
-    <div class="admin-modal-content">
-      <h2>أدخل كلمة المرور للوصول إلى لوحة التحكم</h2>
-      <input type="password" id="adminPasswordInput" placeholder="كلمة المرور">
-      <button id="adminLoginBtn">دخول</button>
+  <section>
+    <h2>زخرفة الأسماء</h2>
+    <p>رفع ملفات القوالب الخاصة بزخرفة الأسماء</p>
+    <input type="file">
+    <button>رفع الملف</button>
+  </section>
 
-      <!-- لوحة التحكم تظهر بعد إدخال كلمة المرور الصحيحة -->
-      <div id="adminPanel" class="admin-panel">
-        <h2>لوحة التحكم - قسم اتصل بنا</h2>
-        <label>نص رأس التبويب:</label>
-        <input type="text" id="contact-tab-title-input">
-        <button id="updateTabTitleBtn">تحديث نص الرأس</button>
+  <section>
+    <h2>لمحة عن التطبيق</h2>
+    <p>تغيير نص لمحة عن التطبيق</p>
+    <textarea placeholder="اكتب نص لمحة عن التطبيق"></textarea>
+    <button>تعديل النص</button>
+  </section>
 
-        <hr>
+  <section>
+    <h2>اتصل بنا</h2>
+    <p>إدارة وسائل التواصل لكل دائرة</p>
+    <label>نص رأس التبويب:</label>
+    <input type="text" placeholder="اكتب نص رأس التبويب">
+    <button>تحديث نص الرأس</button>
 
-        <!-- ٤ دوائر -->
-        <div class="circle-admin">
-          <div class="circle-block">
-            <label>النص 1:</label><input type="text" id="circle1-text">
-            <label>الرابط 1:</label><input type="text" id="circle1-link">
-            <label>صورة 1:</label><input type="file" id="circle1-file">
-            <button id="circle1-upload-btn">رفع الصورة</button>
-            <button id="circle1-remove-btn">إزالة الصورة</button>
-            <button id="circle1-update-btn">تحديث</button>
-          </div>
-          <div class="circle-block">
-            <label>النص 2:</label><input type="text" id="circle2-text">
-            <label>الرابط 2:</label><input type="text" id="circle2-link">
-            <label>صورة 2:</label><input type="file" id="circle2-file">
-            <button id="circle2-upload-btn">رفع الصورة</button>
-            <button id="circle2-remove-btn">إزالة الصورة</button>
-            <button id="circle2-update-btn">تحديث</button>
-          </div>
-          <div class="circle-block">
-            <label>النص 3:</label><input type="text" id="circle3-text">
-            <label>الرابط 3:</label><input type="text" id="circle3-link">
-            <label>صورة 3:</label><input type="file" id="circle3-file">
-            <button id="circle3-upload-btn">رفع الصورة</button>
-            <button id="circle3-remove-btn">إزالة الصورة</button>
-            <button id="circle3-update-btn">تحديث</button>
-          </div>
-          <div class="circle-block">
-            <label>النص 4:</label><input type="text" id="circle4-text">
-            <label>الرابط 4:</label><input type="text" id="circle4-link">
-            <label>صورة 4:</label><input type="file" id="circle4-file">
-            <button id="circle4-upload-btn">رفع الصورة</button>
-            <button id="circle4-remove-btn">إزالة الصورة</button>
-            <button id="circle4-update-btn">تحديث</button>
-          </div>
-        </div>
+    <div class="circle-admin">
+      <!-- ٤ دوائر -->
+      <div class="circle-block">
+        <label>النص 1:</label><input type="text">
+        <label>رابط 1:</label><input type="text">
+        <label>صورة 1:</label><input type="file">
+        <button>رفع الصورة</button>
       </div>
-      <button id="closeAdminModalBtn">إغلاق</button>
+      <div class="circle-block">
+        <label>النص 2:</label><input type="text">
+        <label>رابط 2:</label><input type="text">
+        <label>صورة 2:</label><input type="file">
+        <button>رفع الصورة</button>
+      </div>
+      <div class="circle-block">
+        <label>النص 3:</label><input type="text">
+        <label>رابط 3:</label><input type="text">
+        <label>صورة 3:</label><input type="file">
+        <button>رفع الصورة</button>
+      </div>
+      <div class="circle-block">
+        <label>النص 4:</label><input type="text">
+        <label>رابط 4:</label><input type="text">
+        <label>صورة 4:</label><input type="file">
+        <button>رفع الصورة</button>
+      </div>
     </div>
-  </div>
-
-  <script src="js/script.js" defer></script>
+  </section>
 </body>
 </html>
