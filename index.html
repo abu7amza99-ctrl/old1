@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>عالم التصاميم والزخرفة</title>
   <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <!-- الشريط العلوي -->
   <header>
     <div class="header-center">
       <img src="assets/abu7amza.png" alt="شعار التطبيق" class="app-logo">
@@ -16,18 +15,18 @@
     </div>
 
     <!-- زر لوحة التحكم -->
-    <button id="adminBtn">
+    <button id="adminBtn" aria-label="لوحة التحكم">
       <img src="assets/siting.png" alt="لوحة التحكم" width="40" height="40">
     </button>
 
-    <button class="sidebar-btn">
+    <!-- زر الشريط الجانبي -->
+    <button class="sidebar-btn" aria-label="قائمة">
       <img src="assets/yhbg.png" alt="لوحة جانبية">
     </button>
   </header>
 
-  <!-- اللوحة الجانبية -->
   <aside class="sidebar">
-    <button class="close-btn">&times;</button>
+    <button class="close-btn" aria-label="إغلاق">&times;</button>
     <ul class="sidebar-menu">
       <li><a href="index.html">الصفحة الرئيسية</a></li>
       <li><a href="sections/professional-decoration.html">الزخرفة الاحترافية</a></li>
@@ -37,25 +36,26 @@
     </ul>
   </aside>
 
-  <!-- المحتوى الرئيسي -->
   <main>
     <h1>مرحبًا بك في عالم التصاميم والزخرفة</h1>
     <p>استخدم القائمة الجانبية للتنقل بين الأقسام المختلفة.</p>
   </main>
 
-  <!-- تبويب لوحة التحكم -->
+  <!-- modal (مشترك؛ يظهر على أي صفحة) -->
   <div id="adminModal" class="admin-modal">
     <div class="admin-modal-content">
       <h2>أدخل كلمة المرور للوصول إلى لوحة التحكم</h2>
       <input type="password" id="adminPasswordInput" placeholder="كلمة المرور">
-      <button id="adminLoginBtn">دخول</button>
+      <div style="margin-top:8px;">
+        <button id="adminLoginBtn">دخول</button>
+        <button id="closeAdminModalBtn" style="margin-left:8px;">إغلاق</button>
+      </div>
 
+      <!-- عند النجاح يظهر هذا القسم داخل المودال -->
       <div id="adminPanel" class="admin-panel">
         <h2>لوحة التحكم</h2>
-        <!-- لوحة التحكم لكل الأقسام سيتم تعديلها لاحقاً -->
-        <p>هنا ستظهر إعدادات الأقسام بعد تسجيل الدخول.</p>
+        <p>تم تسجيل الدخول. لإدارة الأقسام افتح صفحة القسم ثم عدّل المحتوى من هناك أو استخدم الحقول داخل كل صفحة قسم.</p>
       </div>
-      <button id="closeAdminModalBtn">إغلاق</button>
     </div>
   </div>
 
