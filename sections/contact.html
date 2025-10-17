@@ -35,56 +35,61 @@
   </aside>
 
   <main>
-    <!-- تبويب ذهبي شفاف 20% يحتوي عنوان + دوائر -->
     <section id="contactTab" class="contact-tab">
       <h2 id="tabTitle">اتصل بنا</h2>
+
+      <!-- كل عنصر دائرة + النص داخل div واحد، النص خارج الدائرة -->
       <div class="circle-container" role="list">
-        <div class="circle" id="circle1" role="listitem" aria-label="وسيلة 1">
-          <img src="../assets/default1.png" alt="وسيلة 1">
+        <div class="circle-item">
+          <div class="circle" id="circle1" role="listitem" aria-label="وسيلة 1">
+            <img src="../assets/default1.png" alt="وسيلة 1">
+          </div>
           <p class="circle-text" id="circle1-text">النص 1</p>
         </div>
 
-        <div class="circle" id="circle2" role="listitem" aria-label="وسيلة 2">
-          <img src="../assets/default2.png" alt="وسيلة 2">
+        <div class="circle-item">
+          <div class="circle" id="circle2" role="listitem" aria-label="وسيلة 2">
+            <img src="../assets/default2.png" alt="وسيلة 2">
+          </div>
           <p class="circle-text" id="circle2-text">النص 2</p>
         </div>
 
-        <div class="circle" id="circle3" role="listitem" aria-label="وسيلة 3">
-          <img src="../assets/default3.png" alt="وسيلة 3">
+        <div class="circle-item">
+          <div class="circle" id="circle3" role="listitem" aria-label="وسيلة 3">
+            <img src="../assets/default3.png" alt="وسيلة 3">
+          </div>
           <p class="circle-text" id="circle3-text">النص 3</p>
         </div>
 
-        <div class="circle" id="circle4" role="listitem" aria-label="وسيلة 4">
-          <img src="../assets/default4.png" alt="وسيلة 4">
+        <div class="circle-item">
+          <div class="circle" id="circle4" role="listitem" aria-label="وسيلة 4">
+            <img src="../assets/default4.png" alt="وسيلة 4">
+          </div>
           <p class="circle-text" id="circle4-text">النص 4</p>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- المودال نفسه (نفس الـ id المستخدم في index) - موجود هنا أيضاً -->
+  <!-- المودال (لوحة التحكم) -->
   <div id="adminModal" class="admin-modal">
     <div class="admin-modal-content">
       <h2>أدخل كلمة المرور للوصول إلى لوحة التحكم</h2>
       <input type="password" id="adminPasswordInput" placeholder="كلمة المرور">
-
       <div style="margin-top:8px;">
         <button id="adminLoginBtn">دخول</button>
         <button id="closeAdminModalBtn" style="margin-left:8px;">إغلاق</button>
       </div>
 
-      <!-- لوحة التحكم الفعلية تظهر هنا بعد النجاح -->
       <div id="adminPanel" class="admin-panel">
         <h2>لوحة التحكم - اتصل بنا</h2>
 
         <label>نص رأس التبويب:</label>
         <input type="text" id="contact-tab-title-input" placeholder="اكتب عنوان التبويب">
-
         <button id="updateTabTitleBtn">تحديث نص الرأس</button>
         <hr>
 
         <div class="circle-admin">
-          <!-- دائرة 1 -->
           <div class="circle-block">
             <label>النص 1:</label>
             <input type="text" id="circle1-text-input" placeholder="نص أسفل صورة 1">
@@ -96,7 +101,6 @@
             <button id="circle1-remove-btn">إزالة صورة</button>
           </div>
 
-          <!-- دائرة 2 -->
           <div class="circle-block">
             <label>النص 2:</label>
             <input type="text" id="circle2-text-input" placeholder="نص أسفل صورة 2">
@@ -108,7 +112,6 @@
             <button id="circle2-remove-btn">إزالة صورة</button>
           </div>
 
-          <!-- دائرة 3 -->
           <div class="circle-block">
             <label>النص 3:</label>
             <input type="text" id="circle3-text-input" placeholder="نص أسفل صورة 3">
@@ -120,7 +123,6 @@
             <button id="circle3-remove-btn">إزالة صورة</button>
           </div>
 
-          <!-- دائرة 4 -->
           <div class="circle-block">
             <label>النص 4:</label>
             <input type="text" id="circle4-text-input" placeholder="نص أسفل صورة 4">
