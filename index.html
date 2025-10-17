@@ -4,8 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>عالم التصاميم والزخرفة</title>
-
-  <!-- رابط الخط -->
   <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -44,6 +42,22 @@
     <h1>مرحبًا بك في عالم التصاميم والزخرفة</h1>
     <p>استخدم القائمة الجانبية للتنقل بين الأقسام المختلفة.</p>
   </main>
+
+  <!-- تبويب لوحة التحكم -->
+  <div id="adminModal" class="admin-modal">
+    <div class="admin-modal-content">
+      <h2>أدخل كلمة المرور للوصول إلى لوحة التحكم</h2>
+      <input type="password" id="adminPasswordInput" placeholder="كلمة المرور">
+      <button id="adminLoginBtn">دخول</button>
+
+      <div id="adminPanel" class="admin-panel">
+        <h2>لوحة التحكم</h2>
+        <!-- لوحة التحكم لكل الأقسام سيتم تعديلها لاحقاً -->
+        <p>هنا ستظهر إعدادات الأقسام بعد تسجيل الدخول.</p>
+      </div>
+      <button id="closeAdminModalBtn">إغلاق</button>
+    </div>
+  </div>
 
   <script src="js/script.js" defer></script>
 </body>
