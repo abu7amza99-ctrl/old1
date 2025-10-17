@@ -1,33 +1,30 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>اتصل بنا</title>
   <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-  <!-- الشريط العلوي -->
   <header>
     <div class="header-center">
       <img src="../assets/abu7amza.png" alt="شعار التطبيق" class="app-logo">
       <div class="app-title">عالم التصاميم والزخرفة</div>
     </div>
 
-    <!-- زر لوحة التحكم -->
-    <button id="adminBtn">
-      <img src="../assets/siting.png" alt="لوحة التحكم">
+    <button id="adminBtn" aria-label="لوحة التحكم">
+      <img src="../assets/siting.png" alt="لوحة التحكم" width="40" height="40">
     </button>
 
-    <button class="sidebar-btn">
+    <button class="sidebar-btn" aria-label="قائمة">
       <img src="../assets/yhbg.png" alt="لوحة جانبية">
     </button>
   </header>
 
-  <!-- الشريط الجانبي -->
   <aside class="sidebar">
-    <button class="close-btn">&times;</button>
+    <button class="close-btn" aria-label="إغلاق">&times;</button>
     <ul class="sidebar-menu">
       <li><a href="../index.html">الصفحة الرئيسية</a></li>
       <li><a href="professional-decoration.html">الزخرفة الاحترافية</a></li>
@@ -37,74 +34,105 @@
     </ul>
   </aside>
 
-  <!-- المحتوى الرئيسي -->
   <main>
-    <div id="contactTab" class="contact-tab">
+    <!-- تبويب ذهبي شفاف 20% يحتوي عنوان + دوائر -->
+    <section id="contactTab" class="contact-tab">
       <h2 id="tabTitle">اتصل بنا</h2>
-      <div class="circle-container">
-        <div class="circle" id="circle1" onclick="window.open('#','_blank')">
-          <img src="../assets/default1.png" alt="صورة 1">
+      <div class="circle-container" role="list">
+        <div class="circle" id="circle1" role="listitem" aria-label="وسيلة 1">
+          <img src="../assets/default1.png" alt="وسيلة 1">
           <p class="circle-text" id="circle1-text">النص 1</p>
         </div>
-        <div class="circle" id="circle2" onclick="window.open('#','_blank')">
-          <img src="../assets/default2.png" alt="صورة 2">
+
+        <div class="circle" id="circle2" role="listitem" aria-label="وسيلة 2">
+          <img src="../assets/default2.png" alt="وسيلة 2">
           <p class="circle-text" id="circle2-text">النص 2</p>
         </div>
-        <div class="circle" id="circle3" onclick="window.open('#','_blank')">
-          <img src="../assets/default3.png" alt="صورة 3">
+
+        <div class="circle" id="circle3" role="listitem" aria-label="وسيلة 3">
+          <img src="../assets/default3.png" alt="وسيلة 3">
           <p class="circle-text" id="circle3-text">النص 3</p>
         </div>
-        <div class="circle" id="circle4" onclick="window.open('#','_blank')">
-          <img src="../assets/default4.png" alt="صورة 4">
+
+        <div class="circle" id="circle4" role="listitem" aria-label="وسيلة 4">
+          <img src="../assets/default4.png" alt="وسيلة 4">
           <p class="circle-text" id="circle4-text">النص 4</p>
         </div>
       </div>
-    </div>
+    </section>
   </main>
 
-  <!-- تبويب لوحة التحكم -->
+  <!-- المودال نفسه (نفس الـ id المستخدم في index) - موجود هنا أيضاً -->
   <div id="adminModal" class="admin-modal">
     <div class="admin-modal-content">
       <h2>أدخل كلمة المرور للوصول إلى لوحة التحكم</h2>
       <input type="password" id="adminPasswordInput" placeholder="كلمة المرور">
-      <button id="adminLoginBtn">دخول</button>
 
+      <div style="margin-top:8px;">
+        <button id="adminLoginBtn">دخول</button>
+        <button id="closeAdminModalBtn" style="margin-left:8px;">إغلاق</button>
+      </div>
+
+      <!-- لوحة التحكم الفعلية تظهر هنا بعد النجاح -->
       <div id="adminPanel" class="admin-panel">
-        <h2>لوحة التحكم - قسم اتصل بنا</h2>
-        <label>نص رأس التبويب:</label>
-        <input type="text" id="contact-tab-title-input" placeholder="نص رأس التبويب">
-        <button id="updateTabTitleBtn">تحديث نص الرأس</button>
+        <h2>لوحة التحكم - اتصل بنا</h2>
 
+        <label>نص رأس التبويب:</label>
+        <input type="text" id="contact-tab-title-input" placeholder="اكتب عنوان التبويب">
+
+        <button id="updateTabTitleBtn">تحديث نص الرأس</button>
         <hr>
 
         <div class="circle-admin">
+          <!-- دائرة 1 -->
           <div class="circle-block">
-            <label>النص 1:</label><input type="text" id="circle1-text-input">
-            <label>الرابط 1:</label><input type="text" id="circle1-link-input">
-            <label>صورة 1:</label><input type="file" id="circle1-file">
-            <button id="circle1-upload-btn">رفع الصورة</button>
+            <label>النص 1:</label>
+            <input type="text" id="circle1-text-input" placeholder="نص أسفل صورة 1">
+            <label>الرابط 1:</label>
+            <input type="text" id="circle1-link-input" placeholder="https://...">
+            <label>صورة 1:</label>
+            <input type="file" id="circle1-file" accept="image/*">
+            <button id="circle1-upload-btn">رفع الصورة / حفظ</button>
+            <button id="circle1-remove-btn">إزالة صورة</button>
           </div>
+
+          <!-- دائرة 2 -->
           <div class="circle-block">
-            <label>النص 2:</label><input type="text" id="circle2-text-input">
-            <label>الرابط 2:</label><input type="text" id="circle2-link-input">
-            <label>صورة 2:</label><input type="file" id="circle2-file">
-            <button id="circle2-upload-btn">رفع الصورة</button>
+            <label>النص 2:</label>
+            <input type="text" id="circle2-text-input" placeholder="نص أسفل صورة 2">
+            <label>الرابط 2:</label>
+            <input type="text" id="circle2-link-input" placeholder="https://...">
+            <label>صورة 2:</label>
+            <input type="file" id="circle2-file" accept="image/*">
+            <button id="circle2-upload-btn">رفع الصورة / حفظ</button>
+            <button id="circle2-remove-btn">إزالة صورة</button>
           </div>
+
+          <!-- دائرة 3 -->
           <div class="circle-block">
-            <label>النص 3:</label><input type="text" id="circle3-text-input">
-            <label>الرابط 3:</label><input type="text" id="circle3-link-input">
-            <label>صورة 3:</label><input type="file" id="circle3-file">
-            <button id="circle3-upload-btn">رفع الصورة</button>
+            <label>النص 3:</label>
+            <input type="text" id="circle3-text-input" placeholder="نص أسفل صورة 3">
+            <label>الرابط 3:</label>
+            <input type="text" id="circle3-link-input" placeholder="https://...">
+            <label>صورة 3:</label>
+            <input type="file" id="circle3-file" accept="image/*">
+            <button id="circle3-upload-btn">رفع الصورة / حفظ</button>
+            <button id="circle3-remove-btn">إزالة صورة</button>
           </div>
+
+          <!-- دائرة 4 -->
           <div class="circle-block">
-            <label>النص 4:</label><input type="text" id="circle4-text-input">
-            <label>الرابط 4:</label><input type="text" id="circle4-link-input">
-            <label>صورة 4:</label><input type="file" id="circle4-file">
-            <button id="circle4-upload-btn">رفع الصورة</button>
+            <label>النص 4:</label>
+            <input type="text" id="circle4-text-input" placeholder="نص أسفل صورة 4">
+            <label>الرابط 4:</label>
+            <input type="text" id="circle4-link-input" placeholder="https://...">
+            <label>صورة 4:</label>
+            <input type="file" id="circle4-file" accept="image/*">
+            <button id="circle4-upload-btn">رفع الصورة / حفظ</button>
+            <button id="circle4-remove-btn">إزالة صورة</button>
           </div>
         </div>
       </div>
-      <button id="closeAdminModalBtn">إغلاق</button>
     </div>
   </div>
 
