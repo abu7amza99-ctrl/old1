@@ -1,132 +1,119 @@
-/* ============================
-   script.js النهائي - كامل
-   - شريط جانبي (أصلي)
-   - modal لوحة التحكم بكلمة مرور (شكلية)
-   - إدارة بيانات قسم "اتصل بنا" باستخدام localStorage
-   ============================ */
+/* ========= script.js نهائي متكامل =========
+  - sidebar
+  - admin modal (password = 1234)
+  - إدارة بيانات قسم اتصل بنا (save/load) باستخدام localStorage
+  - رفع صور كـ DataURL
+=========================================== */
 
-/* --------- Helpers & Config --------- */
 const CONTACT_STORAGE_KEY = 'contactData_v1';
-const ADMIN_PASSWORD = '1234'; // تقدر تغيّرها هنا بسهولة
+const ADMIN_PASSWORD = '1234';
 
 const defaultContactData = {
   tabTitle: 'تواصل معنا',
   circles: [
-    { text: 'وسيلة 1', link: '#', imageData: null },
-    { text: 'وسيلة 2', link: '#', imageData: null },
-    { text: 'وسيلة 3', link: '#', imageData: null },
-    { text: 'وسيلة 4', link: '#', imageData: null },
+    { text: 'النص 1', link: '#', imageData: null },
+    { text: 'النص 2', link: '#', imageData: null },
+    { text: 'النص 3', link: '#', imageData: null },
+    { text: 'النص 4', link: '#', imageData: null },
   ]
 };
 
-function readContactData() {
-  try {
+function readContactData(){
+  try{
     const raw = localStorage.getItem(CONTACT_STORAGE_KEY);
-    if (!raw) return JSON.parse(JSON.stringify(defaultContactData));
+    if(!raw) return JSON.parse(JSON.stringify(defaultContactData));
     return JSON.parse(raw);
-  } catch (e) {
-    console.error('Failed to read contactData:', e);
+  }catch(e){
+    console.error('readContactData error', e);
     return JSON.parse(JSON.stringify(defaultContactData));
   }
 }
-
-function saveContactData(data) {
-  try {
-    localStorage.setItem(CONTACT_STORAGE_KEY, JSON.stringify(data));
-  } catch (e) {
-    console.error('Failed to save contactData:', e);
-  }
+function saveContactData(d){
+  try{ localStorage.setItem(CONTACT_STORAGE_KEY, JSON.stringify(d)); }catch(e){ console.error('saveContactData', e); }
 }
 
-/* --------- UI Application (Contact) --------- */
-function applyContactDataToUI() {
+/* apply data to UI (contact page circles + title) */
+function applyContactDataToUI(){
   const data = readContactData();
+  const tabTitleEl = document.getElementById('tabTitle');
+  if(tabTitleEl) tabTitleEl.textContent = data.tabTitle || '';
 
-  // tab title
-  const tabTitleEl = document.getElementById('tabTitle') || document.getElementById('contact-tab-title') || document.getElementById('contact-tab-title-display');
-  if (tabTitleEl) tabTitleEl.textContent = data.tabTitle || '';
-
-  // circles
-  for (let i = 0; i < 4; i++) {
-    const id = `circle${i + 1}`;
-    const circleEl = document.getElementById(id);
-    if (!circleEl) continue;
-
-    // text element
-    const textEl = circleEl.querySelector('.circle-text');
-    if (textEl) textEl.textContent = (data.circles[i] && data.circles[i].text) ? data.circles[i].text : '';
-
-    // image element
+  for(let i=1;i<=4;i++){
+    const idx = i-1;
+    const circleEl = document.getElementById(`circle${i}`);
+    if(!circleEl) continue;
     const imgEl = circleEl.querySelector('img');
-    if (imgEl) {
-      const imgData = (data.circles[i] && data.circles[i].imageData) ? data.circles[i].imageData : null;
-      if (imgData) {
-        imgEl.src = imgData;
-      } else {
-        // leave existing src (could be default), or clear:
-        // imgEl.src = 'assets/default.png';
-      }
-    }
+    const textEl = circleEl.querySelector('.circle-text');
 
+    if(textEl) textEl.textContent = data.circles[idx].text || '';
+    if(imgEl){
+      if(data.circles[idx].imageData) imgEl.src = data.circles[idx].imageData;
+      // else keep default src already in HTML
+    }
     // link behavior
-    const link = (data.circles[i] && data.circles[i].link) ? data.circles[i].link : null;
-    // Make the whole circle clickable (if not already a link)
-    if (link && link !== '#') {
+    const link = data.circles[idx].link || null;
+    if(link && link !== '#'){
       circleEl.style.cursor = 'pointer';
-      circleEl.onclick = () => { window.open(link, '_blank'); };
+      circleEl.onclick = () => window.open(link,'_blank');
     } else {
-      circleEl.onclick = null;
       circleEl.style.cursor = 'default';
+      circleEl.onclick = null;
     }
   }
 }
 
-/* --------- Admin Modal & Bindings --------- */
-function setupAdminModal() {
-  // Elements (may not exist on every page)
-  const adminBtn = document.getElementById('adminBtn');
+/* Sidebar setup */
+function setupSidebar(){
+  const sidebarBtn = document.querySelector('.sidebar-btn');
+  const sidebar = document.querySelector('.sidebar');
+  const closeBtn = document.querySelector('.close-btn');
+  if(!sidebarBtn || !sidebar) return;
+  sidebarBtn.addEventListener('click', ()=> sidebar.classList.toggle('open'));
+  if(closeBtn) closeBtn.addEventListener('click', ()=> sidebar.classList.remove('open'));
+}
+
+/* Admin modal & bindings */
+function setupAdminModal(){
+  const adminBtn = document.querySelectorAll('#adminBtn');
   const adminModal = document.getElementById('adminModal');
   const adminLoginBtn = document.getElementById('adminLoginBtn');
   const adminPasswordInput = document.getElementById('adminPasswordInput');
   const adminPanel = document.getElementById('adminPanel');
   const closeAdminModalBtn = document.getElementById('closeAdminModalBtn');
 
-  if (!adminBtn || !adminModal || !adminLoginBtn || !adminPasswordInput || !adminPanel || !closeAdminModalBtn) {
-    // Modal elements not present on this page — nothing to bind
-    return;
+  if(!adminModal) return;
+
+  // Open modal when any adminBtn clicked (works on pages with multiple adminBtn)
+  adminBtn.forEach(btn => btn.addEventListener('click', () => {
+    adminModal.style.display = 'block';
+    if(adminPasswordInput) adminPasswordInput.value = '';
+    if(adminPanel) adminPanel.style.display = 'none';
+    populateAdminFields();
+  }));
+
+  if(closeAdminModalBtn) closeAdminModalBtn.addEventListener('click', ()=> adminModal.style.display = 'none');
+
+  if(adminLoginBtn && adminPasswordInput && adminPanel){
+    adminLoginBtn.addEventListener('click', ()=>{
+      if((adminPasswordInput.value || '').trim() === ADMIN_PASSWORD){
+        adminPanel.style.display = 'block';
+        populateAdminFields();
+      } else {
+        alert('كلمة المرور خاطئة!');
+      }
+    });
   }
 
-  // Open modal
-  adminBtn.addEventListener('click', () => {
-    adminModal.style.display = 'block';
-    adminPasswordInput.value = '';
-    adminPanel.style.display = 'none';
-    // populate fields with current data so admin sees current values
-    populateAdminFields();
+  // close by clicking outside content
+  adminModal.addEventListener('click', (e)=>{
+    if(e.target === adminModal) adminModal.style.display = 'none';
   });
 
-  // Close modal
-  closeAdminModalBtn.addEventListener('click', () => {
-    adminModal.style.display = 'none';
-  });
-
-  // Login / show panel
-  adminLoginBtn.addEventListener('click', () => {
-    const val = (adminPasswordInput.value || '').trim();
-    if (val === ADMIN_PASSWORD) {
-      adminPanel.style.display = 'block';
-      // populate again to ensure fields current
-      populateAdminFields();
-    } else {
-      alert('كلمة المرور خاطئة!');
-    }
-  });
-
-  // Bind update tab title button if present
+  // Bind admin actions (if inputs exist)
   const updateTabTitleBtn = document.getElementById('updateTabTitleBtn');
   const tabInput = document.getElementById('contact-tab-title-input');
-  if (updateTabTitleBtn && tabInput) {
-    updateTabTitleBtn.addEventListener('click', () => {
+  if(updateTabTitleBtn && tabInput){
+    updateTabTitleBtn.addEventListener('click', ()=>{
       const data = readContactData();
       data.tabTitle = tabInput.value || '';
       saveContactData(data);
@@ -135,102 +122,70 @@ function setupAdminModal() {
     });
   }
 
-  // For each circle bind upload, text and link update
-  for (let i = 1; i <= 4; i++) {
-    const textInput = document.getElementById(`circle${i}-text`);
-    const linkInput = document.getElementById(`circle${i}-link`);
-    const fileInput = document.getElementById(`circle${i}-file`);
-    const uploadBtn = document.getElementById(`circle${i}-upload-btn`);
-    const removeBtn = document.getElementById(`circle${i}-remove-btn`); // optional
+  // circles controls
+  for(let i=1;i<=4;i++){
+    (function(i){
+      const textInput = document.getElementById(`circle${i}-text-input`);
+      const linkInput = document.getElementById(`circle${i}-link-input`);
+      const fileInput = document.getElementById(`circle${i}-file`);
+      const uploadBtn = document.getElementById(`circle${i}-upload-btn`);
+      const removeBtn = document.getElementById(`circle${i}-remove-btn`);
 
-    // If update text/link exists we update on click of uploadBtn or live
-    if (uploadBtn) {
-      uploadBtn.addEventListener('click', () => {
-        const data = readContactData();
-        const idx = i - 1;
+      if(uploadBtn){
+        uploadBtn.addEventListener('click', ()=>{
+          const data = readContactData();
+          const idx = i-1;
+          if(textInput) data.circles[idx].text = textInput.value || '';
+          if(linkInput) data.circles[idx].link = linkInput.value || '#';
 
-        // update text
-        if (textInput) data.circles[idx].text = textInput.value || '';
-
-        // update link
-        if (linkInput) data.circles[idx].link = linkInput.value || '#';
-
-        // handle file
-        if (fileInput && fileInput.files && fileInput.files[0]) {
-          const file = fileInput.files[0];
-          const reader = new FileReader();
-          reader.onload = function(e) {
-            data.circles[idx].imageData = e.target.result;
+          if(fileInput && fileInput.files && fileInput.files[0]){
+            const reader = new FileReader();
+            reader.onload = function(e){
+              data.circles[idx].imageData = e.target.result;
+              saveContactData(data);
+              applyContactDataToUI();
+              alert(`تم تحديث الدائرة ${i} (بما فيها الصورة).`);
+            };
+            reader.readAsDataURL(fileInput.files[0]);
+          } else {
             saveContactData(data);
             applyContactDataToUI();
-            alert(`تم تحديث الدائرة ${i} (شمل الصورة).`);
-          };
-          reader.readAsDataURL(file);
-        } else {
-          // no file: just save text/link
+            alert(`تم تحديث الدائرة ${i}.`);
+          }
+        });
+      }
+
+      if(removeBtn){
+        removeBtn.addEventListener('click', ()=>{
+          const data = readContactData();
+          data.circles[i-1].imageData = null;
           saveContactData(data);
           applyContactDataToUI();
-          alert(`تم تحديث الدائرة ${i}.`);
-        }
-      });
-    }
-
-    if (removeBtn) {
-      removeBtn.addEventListener('click', () => {
-        const data = readContactData();
-        data.circles[i - 1].imageData = null;
-        saveContactData(data);
-        applyContactDataToUI();
-        alert(`تم إزالة صورة الدائرة ${i}.`);
-      });
-    }
+          alert(`تم إزالة صورة الدائرة ${i}.`);
+        });
+      }
+    })(i);
   }
 }
 
-/* Fill admin inputs with current data (if present) */
-function populateAdminFields() {
+/* populate admin inputs from saved data */
+function populateAdminFields(){
   const data = readContactData();
   const tabInput = document.getElementById('contact-tab-title-input');
-  if (tabInput) tabInput.value = data.tabTitle || '';
+  if(tabInput) tabInput.value = data.tabTitle || '';
 
-  for (let i = 1; i <= 4; i++) {
-    const idx = i - 1;
-    const textInput = document.getElementById(`circle${i}-text`);
-    const linkInput = document.getElementById(`circle${i}-link`);
-    if (textInput) textInput.value = data.circles[idx].text || '';
-    if (linkInput) linkInput.value = data.circles[idx].link || '';
+  for(let i=1;i<=4;i++){
+    const idx = i-1;
+    const textInput = document.getElementById(`circle${i}-text-input`);
+    const linkInput = document.getElementById(`circle${i}-link-input`);
+    if(textInput) textInput.value = data.circles[idx].text || '';
+    if(linkInput) linkInput.value = data.circles[idx].link || '';
   }
 }
 
-/* --------- Sidebar original functions (safe checks) --------- */
-function setupSidebar() {
-  const sidebarBtn = document.querySelector('.sidebar-btn');
-  const sidebar = document.querySelector('.sidebar');
-  const closeBtn = document.querySelector('.close-btn');
-  if (!sidebarBtn || !sidebar) return;
-  sidebarBtn.addEventListener('click', () => sidebar.classList.toggle('open'));
-  if (closeBtn) closeBtn.addEventListener('click', () => sidebar.classList.remove('open'));
-}
-
-/* --------- Init on DOMContentLoaded --------- */
-document.addEventListener('DOMContentLoaded', () => {
-  // Apply saved contact data to UI (on contact page elements if present)
-  applyContactDataToUI();
-
-  // Setup sidebar (works on all pages)
+/* init */
+document.addEventListener('DOMContentLoaded', ()=>{
   setupSidebar();
-
-  // Setup admin modal & bindings if modal exists in DOM
   setupAdminModal();
-
-  // If admin modal is present but admin button is not (edge cases), try to find any .open-admin triggers
-  const adminModal = document.getElementById('adminModal');
-  if (adminModal) {
-    // Optional: close modal when clicking outside content
-    adminModal.addEventListener('click', (e) => {
-      if (e.target === adminModal) {
-        adminModal.style.display = 'none';
-      }
-    });
-  }
+  applyContactDataToUI();
 });
