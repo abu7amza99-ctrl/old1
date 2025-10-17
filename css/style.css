@@ -24,21 +24,18 @@ header {
   border-radius: 0 0 15px 15px;
 }
 
-/* ترتيب الشعار والاسم بجانب بعض */
 .header-center {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px; /* مسافة بين الشعار والاسم */
+  gap: 10px;
 }
 
-/* شعار التطبيق */
 .app-logo {
   width: 40px;
   height: 40px;
 }
 
-/* اسم التطبيق */
 .app-title {
   font-size: 32px;
   font-weight: bold;
@@ -47,7 +44,6 @@ header {
   margin: 0;
 }
 
-/* زر لوحة التحكم */
 #adminBtn {
   position: absolute;
   left: 20px;
@@ -62,7 +58,7 @@ header {
   display: block;
 }
 
-/* زر الشريط الجانبي */
+/* الشريط الجانبي */
 .sidebar-btn {
   position: absolute;
   right: 20px;
@@ -82,7 +78,6 @@ header {
   height: 100%;
 }
 
-/* اللوحة الجانبية */
 .sidebar {
   position: fixed;
   top: 0;
@@ -114,7 +109,6 @@ header {
   font-weight: bold;
 }
 
-/* قائمة الأقسام */
 .sidebar-menu {
   list-style: none;
   padding: 0;
@@ -136,61 +130,76 @@ header {
   color: white;
 }
 
-/* المحتوى الرئيسي */
 main {
   padding: 20px;
   color: #000;
   text-align: center;
 }
 
-/* --------------------------- */
-/* قسم اتصل بنا الجديد */
-/* --------------------------- */
+/* ---------------------------
+   تبويب ذهبي للوحة التحكم
+--------------------------- */
+.admin-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(212,175,55,0.2);
+  backdrop-filter: blur(5px);
+  z-index: 9999;
+  overflow-y: auto;
+}
 
-.contact-tab {
-  background-color: rgba(212,175,55,0.2); /* ذهبي شفاف 20% */
+.admin-modal-content {
+  background-color: rgba(255, 215, 0, 0.2);
+  margin: 50px auto;
   padding: 20px;
+  border-radius: 15px;
+  max-width: 900px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
   text-align: center;
-  border-radius: 10px;
-  margin-bottom: 20px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
-.contact-tab h2 {
-  margin-bottom: 20px;
-  color: #D4AF37;
-  font-size: 28px;
+.admin-modal-content input,
+.admin-modal-content button {
+  margin: 8px 0;
+  padding: 8px;
+  width: 80%;
+  max-width: 400px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
 }
 
-/* دوائر التواصل */
-.contact-circles {
+.admin-modal-content button {
+  background-color: #D4AF37;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.admin-modal-content button:hover {
+  background-color: #b8962f;
+}
+
+.admin-panel {
+  display: none;
+  margin-top: 20px;
+}
+
+.circle-admin {
   display: flex;
-  justify-content: center;
-  gap: 30px;
   flex-wrap: wrap;
+  justify-content: space-around;
 }
 
-.contact-circle {
-  width: 100px;
-  height: 100px;
-  border: 3px solid #000;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  color: #000;
-  flex-direction: column;
-  transition: transform 0.3s, border-color 0.3s;
-}
-
-.contact-circle:hover {
-  transform: scale(1.1);
-  border-color: #D4AF37;
-}
-
-.circle-text {
-  margin-top: 10px;
-  font-size: 14px;
-  text-align: center;
+.circle-block {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+  width: 200px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+  text-align: left;
 }
