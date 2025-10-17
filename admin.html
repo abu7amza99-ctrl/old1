@@ -1,60 +1,40 @@
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>لوحة التحكم</title>
-  <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
-  <style>
-    body { font-family: 'Reem Kufi', sans-serif; background-color: #f5f5f5; margin: 0; padding: 20px; }
-    h1 { text-align: center; color: #D4AF37; }
-    section { background-color: white; border-radius: 10px; padding: 15px; margin: 20px auto; max-width: 700px; box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
-    input, button, textarea { margin: 5px 0; padding: 8px; width: 100%; border-radius: 5px; border: 1px solid #ccc; }
-    button { background-color: #D4AF37; border: none; color: #fff; font-weight: bold; cursor: pointer; }
-    button:hover { background-color: #b8962f; }
-  </style>
-</head>
-<body>
-  <h1>لوحة التحكم</h1>
+<section>
+  <h2>اتصل بنا</h2>
+  <p>تعديل تبويب التواصل والدوائر</p>
 
-  <section>
-    <h2>الصفحة الرئيسية</h2>
-    <p>إضافة أكثر من 20 صورة لتظهر في الصفحة الرئيسية</p>
-    <input type="file" multiple>
-    <button>رفع الصور</button>
-  </section>
+  <label>نص رأس التبويب</label>
+  <input type="text" id="contact-tab-title-input" placeholder="تغيير نص رأس التبويب">
+  <button onclick="updateContactTabTitle(document.getElementById('contact-tab-title-input').value)">تحديث رأس التبويب</button>
 
-  <section>
-    <h2>زخرفة الاحترافية</h2>
-    <p>إضافة خطوط أو تلبيس لكل تصميم</p>
-    <input type="text" placeholder="اسم الخط">
-    <button>إضافة خط</button>
-    <input type="file">
-    <button>إضافة تلبيس</button>
-  </section>
-
-  <section>
-    <h2>زخرفة الأسماء</h2>
-    <p>رفع ملفات القوالب الخاصة بزخرفة الأسماء</p>
-    <input type="file">
-    <button>رفع الملف</button>
-  </section>
-
-  <section>
-    <h2>لمحة عن التطبيق</h2>
-    <p>تغيير نص لمحة عن التطبيق</p>
-    <textarea placeholder="اكتب نص لمحة عن التطبيق"></textarea>
-    <button>تعديل النص</button>
-  </section>
-
-  <section>
-    <h2>اتصل بنا</h2>
-    <p>إضافة وسائل التواصل</p>
-    <input type="text" placeholder="اسم الوسيلة">
-    <input type="file" placeholder="صورة الوسيلة">
-    <input type="text" placeholder="رابط الوسيلة">
-    <button>إضافة وسيلة</button>
-  </section>
-</body>
-</html>
+  <div class="circle-controls">
+    <h3>الدوائر</h3>
+    <div>
+      <label>دائرة 1: نص</label>
+      <input type="text" id="circle1-text" placeholder="النص أسفل الدائرة">
+      <label>دائرة 1: رابط</label>
+      <input type="text" id="circle1-link" placeholder="رابط التواصل">
+      <button onclick="updateContactCircle('circle1', document.getElementById('circle1-text').value, document.getElementById('circle1-link').value)">تحديث دائرة 1</button>
+    </div>
+    <div>
+      <label>دائرة 2: نص</label>
+      <input type="text" id="circle2-text" placeholder="النص أسفل الدائرة">
+      <label>دائرة 2: رابط</label>
+      <input type="text" id="circle2-link" placeholder="رابط التواصل">
+      <button onclick="updateContactCircle('circle2', document.getElementById('circle2-text').value, document.getElementById('circle2-link').value)">تحديث دائرة 2</button>
+    </div>
+    <div>
+      <label>دائرة 3: نص</label>
+      <input type="text" id="circle3-text" placeholder="النص أسفل الدائرة">
+      <label>دائرة 3: رابط</label>
+      <input type="text" id="circle3-link" placeholder="رابط التواصل">
+      <button onclick="updateContactCircle('circle3', document.getElementById('circle3-text').value, document.getElementById('circle3-link').value)">تحديث دائرة 3</button>
+    </div>
+    <div>
+      <label>دائرة 4: نص</label>
+      <input type="text" id="circle4-text" placeholder="النص أسفل الدائرة">
+      <label>دائرة 4: رابط</label>
+      <input type="text" id="circle4-link" placeholder="رابط التواصل">
+      <button onclick="updateContactCircle('circle4', document.getElementById('circle4-text').value, document.getElementById('circle4-link').value)">تحديث دائرة 4</button>
+    </div>
+  </div>
+</section>
