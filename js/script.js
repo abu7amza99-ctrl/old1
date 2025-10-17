@@ -1,10 +1,4 @@
-/* ========= script.js نهائي متكامل =========
-  - sidebar
-  - admin modal (password = 1234)
-  - إدارة بيانات قسم اتصل بنا (save/load) باستخدام localStorage
-  - رفع صور كـ DataURL
-=========================================== */
-
+/* ========= script.js محدث ========= */
 const CONTACT_STORAGE_KEY = 'contactData_v1';
 const ADMIN_PASSWORD = '1234';
 
@@ -28,11 +22,9 @@ function readContactData(){
     return JSON.parse(JSON.stringify(defaultContactData));
   }
 }
-function saveContactData(d){
-  try{ localStorage.setItem(CONTACT_STORAGE_KEY, JSON.stringify(d)); }catch(e){ console.error('saveContactData', e); }
-}
+function saveContactData(d){ try{ localStorage.setItem(CONTACT_STORAGE_KEY, JSON.stringify(d)); }catch(e){ console.error(e); } }
 
-/* apply data to UI (contact page circles + title) */
+/* Apply data to UI */
 function applyContactDataToUI(){
   const data = readContactData();
   const tabTitleEl = document.getElementById('tabTitle');
@@ -41,16 +33,20 @@ function applyContactDataToUI(){
   for(let i=1;i<=4;i++){
     const idx = i-1;
     const circleEl = document.getElementById(`circle${i}`);
+    const textEl = document.getElementById(`circle${i}-text`);
     if(!circleEl) continue;
-    const imgEl = circleEl.querySelector('img');
-    const textEl = circleEl.querySelector('.circle-text');
 
-    if(textEl) textEl.textContent = data.circles[idx].text || '';
+    // image
+    const imgEl = circleEl.querySelector('img');
     if(imgEl){
       if(data.circles[idx].imageData) imgEl.src = data.circles[idx].imageData;
-      // else keep default src already in HTML
+      // else keep default src
     }
-    // link behavior
+
+    // text (now outside the .circle)
+    if(textEl) textEl.textContent = data.circles[idx].text || '';
+
+    // link
     const link = data.circles[idx].link || null;
     if(link && link !== '#'){
       circleEl.style.cursor = 'pointer';
@@ -62,7 +58,7 @@ function applyContactDataToUI(){
   }
 }
 
-/* Sidebar setup */
+/* Sidebar */
 function setupSidebar(){
   const sidebarBtn = document.querySelector('.sidebar-btn');
   const sidebar = document.querySelector('.sidebar');
@@ -74,7 +70,7 @@ function setupSidebar(){
 
 /* Admin modal & bindings */
 function setupAdminModal(){
-  const adminBtn = document.querySelectorAll('#adminBtn');
+  const adminBtns = document.querySelectorAll('#adminBtn');
   const adminModal = document.getElementById('adminModal');
   const adminLoginBtn = document.getElementById('adminLoginBtn');
   const adminPasswordInput = document.getElementById('adminPasswordInput');
@@ -83,13 +79,14 @@ function setupAdminModal(){
 
   if(!adminModal) return;
 
-  // Open modal when any adminBtn clicked (works on pages with multiple adminBtn)
-  adminBtn.forEach(btn => btn.addEventListener('click', () => {
-    adminModal.style.display = 'block';
-    if(adminPasswordInput) adminPasswordInput.value = '';
-    if(adminPanel) adminPanel.style.display = 'none';
-    populateAdminFields();
-  }));
+  adminBtns.forEach(btn => {
+    btn.addEventListener('click', ()=>{
+      adminModal.style.display = 'block';
+      if(adminPasswordInput) adminPasswordInput.value = '';
+      if(adminPanel) adminPanel.style.display = 'none';
+      populateAdminFields();
+    });
+  });
 
   if(closeAdminModalBtn) closeAdminModalBtn.addEventListener('click', ()=> adminModal.style.display = 'none');
 
@@ -104,12 +101,10 @@ function setupAdminModal(){
     });
   }
 
-  // close by clicking outside content
-  adminModal.addEventListener('click', (e)=>{
-    if(e.target === adminModal) adminModal.style.display = 'none';
-  });
+  // close modal on outside click
+  adminModal.addEventListener('click', (e)=> { if(e.target === adminModal) adminModal.style.display = 'none'; });
 
-  // Bind admin actions (if inputs exist)
+  // update tab title
   const updateTabTitleBtn = document.getElementById('updateTabTitleBtn');
   const tabInput = document.getElementById('contact-tab-title-input');
   if(updateTabTitleBtn && tabInput){
@@ -122,7 +117,7 @@ function setupAdminModal(){
     });
   }
 
-  // circles controls
+  // circles upload / text / link
   for(let i=1;i<=4;i++){
     (function(i){
       const textInput = document.getElementById(`circle${i}-text-input`);
@@ -168,7 +163,7 @@ function setupAdminModal(){
   }
 }
 
-/* populate admin inputs from saved data */
+/* populate admin inputs */
 function populateAdminFields(){
   const data = readContactData();
   const tabInput = document.getElementById('contact-tab-title-input');
