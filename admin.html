@@ -1,40 +1,101 @@
-<section>
-  <h2>اتصل بنا</h2>
-  <p>تعديل تبويب التواصل والدوائر</p>
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>عالم التصاميم والزخرفة</title>
+  <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- الشريط العلوي -->
+  <header>
+    <div class="header-center">
+      <div class="app-title">عالم التصاميم والزخرفة</div>
+      <img src="assets/abu7amza.png" alt="شعار التطبيق" class="app-logo">
+    </div>
+    <button class="sidebar-btn">
+      <img src="assets/yhbg.png" alt="لوحة جانبية">
+    </button>
+    <!-- زر لوحة التحكم -->
+    <button id="adminBtn">
+      <img src="assets/siting.png" alt="لوحة التحكم">
+    </button>
+  </header>
 
-  <label>نص رأس التبويب</label>
-  <input type="text" id="contact-tab-title-input" placeholder="تغيير نص رأس التبويب">
-  <button onclick="updateContactTabTitle(document.getElementById('contact-tab-title-input').value)">تحديث رأس التبويب</button>
+  <!-- اللوحة الجانبية -->
+  <aside class="sidebar">
+    <button class="close-btn">&times;</button>
+    <ul class="sidebar-menu">
+      <li><a href="index.html">الصفحة الرئيسية</a></li>
+      <li><a href="professional-decoration.html">الزخرفة الاحترافية</a></li>
+      <li><a href="name-decoration.html">زخرفة الأسماء</a></li>
+      <li><a href="about.html">لمحة عن التطبيق</a></li>
+      <li><a href="contact.html">اتصل بنا</a></li>
+    </ul>
+  </aside>
 
-  <div class="circle-controls">
-    <h3>الدوائر</h3>
-    <div>
-      <label>دائرة 1: نص</label>
-      <input type="text" id="circle1-text" placeholder="النص أسفل الدائرة">
-      <label>دائرة 1: رابط</label>
-      <input type="text" id="circle1-link" placeholder="رابط التواصل">
-      <button onclick="updateContactCircle('circle1', document.getElementById('circle1-text').value, document.getElementById('circle1-link').value)">تحديث دائرة 1</button>
-    </div>
-    <div>
-      <label>دائرة 2: نص</label>
-      <input type="text" id="circle2-text" placeholder="النص أسفل الدائرة">
-      <label>دائرة 2: رابط</label>
-      <input type="text" id="circle2-link" placeholder="رابط التواصل">
-      <button onclick="updateContactCircle('circle2', document.getElementById('circle2-text').value, document.getElementById('circle2-link').value)">تحديث دائرة 2</button>
-    </div>
-    <div>
-      <label>دائرة 3: نص</label>
-      <input type="text" id="circle3-text" placeholder="النص أسفل الدائرة">
-      <label>دائرة 3: رابط</label>
-      <input type="text" id="circle3-link" placeholder="رابط التواصل">
-      <button onclick="updateContactCircle('circle3', document.getElementById('circle3-text').value, document.getElementById('circle3-link').value)">تحديث دائرة 3</button>
-    </div>
-    <div>
-      <label>دائرة 4: نص</label>
-      <input type="text" id="circle4-text" placeholder="النص أسفل الدائرة">
-      <label>دائرة 4: رابط</label>
-      <input type="text" id="circle4-link" placeholder="رابط التواصل">
-      <button onclick="updateContactCircle('circle4', document.getElementById('circle4-text').value, document.getElementById('circle4-link').value)">تحديث دائرة 4</button>
+  <main>
+    <h1>مرحبًا بك في عالم التصاميم والزخرفة</h1>
+    <p>استخدم القائمة الجانبية للتنقل بين الأقسام المختلفة.</p>
+  </main>
+
+  <!-- التبويب الذهبي للوحة التحكم -->
+  <div id="adminModal" class="admin-modal">
+    <div class="admin-modal-content">
+      <h2>أدخل كلمة المرور للوصول إلى لوحة التحكم</h2>
+      <input type="password" id="adminPasswordInput" placeholder="كلمة المرور">
+      <button id="adminLoginBtn">دخول</button>
+
+      <!-- لوحة التحكم تظهر بعد إدخال كلمة المرور الصحيحة -->
+      <div id="adminPanel" class="admin-panel">
+        <h2>لوحة التحكم - قسم اتصل بنا</h2>
+        <label>نص رأس التبويب:</label>
+        <input type="text" id="contact-tab-title-input">
+        <button id="updateTabTitleBtn">تحديث نص الرأس</button>
+
+        <hr>
+
+        <!-- ٤ دوائر -->
+        <div class="circle-admin">
+          <div class="circle-block">
+            <label>النص 1:</label><input type="text" id="circle1-text">
+            <label>الرابط 1:</label><input type="text" id="circle1-link">
+            <label>صورة 1:</label><input type="file" id="circle1-file">
+            <button id="circle1-upload-btn">رفع الصورة</button>
+            <button id="circle1-remove-btn">إزالة الصورة</button>
+            <button id="circle1-update-btn">تحديث</button>
+          </div>
+          <div class="circle-block">
+            <label>النص 2:</label><input type="text" id="circle2-text">
+            <label>الرابط 2:</label><input type="text" id="circle2-link">
+            <label>صورة 2:</label><input type="file" id="circle2-file">
+            <button id="circle2-upload-btn">رفع الصورة</button>
+            <button id="circle2-remove-btn">إزالة الصورة</button>
+            <button id="circle2-update-btn">تحديث</button>
+          </div>
+          <div class="circle-block">
+            <label>النص 3:</label><input type="text" id="circle3-text">
+            <label>الرابط 3:</label><input type="text" id="circle3-link">
+            <label>صورة 3:</label><input type="file" id="circle3-file">
+            <button id="circle3-upload-btn">رفع الصورة</button>
+            <button id="circle3-remove-btn">إزالة الصورة</button>
+            <button id="circle3-update-btn">تحديث</button>
+          </div>
+          <div class="circle-block">
+            <label>النص 4:</label><input type="text" id="circle4-text">
+            <label>الرابط 4:</label><input type="text" id="circle4-link">
+            <label>صورة 4:</label><input type="file" id="circle4-file">
+            <button id="circle4-upload-btn">رفع الصورة</button>
+            <button id="circle4-remove-btn">إزالة الصورة</button>
+            <button id="circle4-update-btn">تحديث</button>
+          </div>
+        </div>
+      </div>
+      <button id="closeAdminModalBtn">إغلاق</button>
     </div>
   </div>
-</section>
+
+  <script src="js/script.js" defer></script>
+</body>
+</html>
