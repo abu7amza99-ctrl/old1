@@ -17,3 +17,19 @@ if(adminBtn){
     window.location.href = 'admin.html';
   });
 }
+
+// لوحة التحكم لقسم اتصل بنا
+function updateContactCircle(circleId, newText, newLink){
+  const circle = document.getElementById(circleId);
+  if(circle){
+    circle.querySelector('.circle-text').textContent = newText;
+    circle.href = newLink;
+  }
+}
+
+function updateContactTabTitle(newTitle){
+  const tabTitle = document.getElementById('contact-tab-title');
+  if(tabTitle){
+    tabTitle.textContent = newTitle;
+  }
+}
