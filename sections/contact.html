@@ -8,19 +8,24 @@
   <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
+  <!-- الشريط العلوي -->
   <header>
     <div class="header-center">
-      <div class="app-title">عالم التصاميم والزخرفة</div>
       <img src="../assets/abu7amza.png" alt="شعار التطبيق" class="app-logo">
+      <div class="app-title">عالم التصاميم والزخرفة</div>
     </div>
-    <button class="sidebar-btn">
-      <img src="../assets/yhbg.png" alt="لوحة جانبية">
-    </button>
+
+    <!-- زر لوحة التحكم -->
     <button id="adminBtn">
       <img src="../assets/siting.png" alt="لوحة التحكم">
     </button>
+
+    <button class="sidebar-btn">
+      <img src="../assets/yhbg.png" alt="لوحة جانبية">
+    </button>
   </header>
 
+  <!-- الشريط الجانبي -->
   <aside class="sidebar">
     <button class="close-btn">&times;</button>
     <ul class="sidebar-menu">
@@ -32,25 +37,26 @@
     </ul>
   </aside>
 
+  <!-- المحتوى الرئيسي -->
   <main>
     <div id="contactTab" class="contact-tab">
       <h2 id="tabTitle">اتصل بنا</h2>
       <div class="circle-container">
-        <div class="circle" id="circle1">
-          <img src="" alt="صورة 1">
-          <p class="circle-text">النص 1</p>
+        <div class="circle" id="circle1" onclick="window.open('#','_blank')">
+          <img src="../assets/default1.png" alt="صورة 1">
+          <p class="circle-text" id="circle1-text">النص 1</p>
         </div>
-        <div class="circle" id="circle2">
-          <img src="" alt="صورة 2">
-          <p class="circle-text">النص 2</p>
+        <div class="circle" id="circle2" onclick="window.open('#','_blank')">
+          <img src="../assets/default2.png" alt="صورة 2">
+          <p class="circle-text" id="circle2-text">النص 2</p>
         </div>
-        <div class="circle" id="circle3">
-          <img src="" alt="صورة 3">
-          <p class="circle-text">النص 3</p>
+        <div class="circle" id="circle3" onclick="window.open('#','_blank')">
+          <img src="../assets/default3.png" alt="صورة 3">
+          <p class="circle-text" id="circle3-text">النص 3</p>
         </div>
-        <div class="circle" id="circle4">
-          <img src="" alt="صورة 4">
-          <p class="circle-text">النص 4</p>
+        <div class="circle" id="circle4" onclick="window.open('#','_blank')">
+          <img src="../assets/default4.png" alt="صورة 4">
+          <p class="circle-text" id="circle4-text">النص 4</p>
         </div>
       </div>
     </div>
@@ -66,34 +72,33 @@
       <div id="adminPanel" class="admin-panel">
         <h2>لوحة التحكم - قسم اتصل بنا</h2>
         <label>نص رأس التبويب:</label>
-        <input type="text" id="contact-tab-title-input">
+        <input type="text" id="contact-tab-title-input" placeholder="نص رأس التبويب">
         <button id="updateTabTitleBtn">تحديث نص الرأس</button>
 
         <hr>
 
         <div class="circle-admin">
-          <!-- ٤ دوائر -->
           <div class="circle-block">
-            <label>النص 1:</label><input type="text" id="circle1-text">
-            <label>الرابط 1:</label><input type="text" id="circle1-link">
+            <label>النص 1:</label><input type="text" id="circle1-text-input">
+            <label>الرابط 1:</label><input type="text" id="circle1-link-input">
             <label>صورة 1:</label><input type="file" id="circle1-file">
             <button id="circle1-upload-btn">رفع الصورة</button>
           </div>
           <div class="circle-block">
-            <label>النص 2:</label><input type="text" id="circle2-text">
-            <label>الرابط 2:</label><input type="text" id="circle2-link">
+            <label>النص 2:</label><input type="text" id="circle2-text-input">
+            <label>الرابط 2:</label><input type="text" id="circle2-link-input">
             <label>صورة 2:</label><input type="file" id="circle2-file">
             <button id="circle2-upload-btn">رفع الصورة</button>
           </div>
           <div class="circle-block">
-            <label>النص 3:</label><input type="text" id="circle3-text">
-            <label>الرابط 3:</label><input type="text" id="circle3-link">
+            <label>النص 3:</label><input type="text" id="circle3-text-input">
+            <label>الرابط 3:</label><input type="text" id="circle3-link-input">
             <label>صورة 3:</label><input type="file" id="circle3-file">
             <button id="circle3-upload-btn">رفع الصورة</button>
           </div>
           <div class="circle-block">
-            <label>النص 4:</label><input type="text" id="circle4-text">
-            <label>الرابط 4:</label><input type="text" id="circle4-link">
+            <label>النص 4:</label><input type="text" id="circle4-text-input">
+            <label>الرابط 4:</label><input type="text" id="circle4-link-input">
             <label>صورة 4:</label><input type="file" id="circle4-file">
             <button id="circle4-upload-btn">رفع الصورة</button>
           </div>
@@ -104,64 +109,5 @@
   </div>
 
   <script src="../js/script.js" defer></script>
-  <script>
-    // تحميل البيانات من localStorage عند فتح الصفحة
-    const tabTitleEl = document.getElementById('tabTitle');
-    const loadContactData = () => {
-      const title = localStorage.getItem('contactTabTitle');
-      if(title) tabTitleEl.textContent = title;
-
-      for(let i=1;i<=4;i++){
-        const circle = document.getElementById('circle'+i);
-        const text = localStorage.getItem('circle'+i+'Text');
-        const link = localStorage.getItem('circle'+i+'Link');
-        const imgSrc = localStorage.getItem('circle'+i+'Img');
-
-        if(text) circle.querySelector('.circle-text').textContent = text;
-        if(imgSrc) circle.querySelector('img').src = imgSrc;
-        if(link) circle.querySelector('img').onclick = () => window.open(link,'_blank');
-      }
-    };
-    window.onload = loadContactData;
-
-    // حفظ البيانات عند تحديث لوحة التحكم
-    const updateTabTitleBtn = document.getElementById('updateTabTitleBtn');
-    updateTabTitleBtn.addEventListener('click', () => {
-      const val = document.getElementById('contact-tab-title-input').value;
-      if(val) {
-        tabTitleEl.textContent = val;
-        localStorage.setItem('contactTabTitle', val);
-        alert('تم تحديث نص رأس التبويب');
-      }
-    });
-
-    for(let i=1;i<=4;i++){
-      const uploadBtn = document.getElementById('circle'+i+'-upload-btn');
-      uploadBtn.addEventListener('click', () => {
-        const fileInput = document.getElementById('circle'+i+'-file');
-        const textInput = document.getElementById('circle'+i+'-text');
-        const linkInput = document.getElementById('circle'+i+'-link');
-        const circle = document.getElementById('circle'+i);
-
-        if(textInput.value) {
-          circle.querySelector('.circle-text').textContent = textInput.value;
-          localStorage.setItem('circle'+i+'Text', textInput.value);
-        }
-        if(linkInput.value){
-          circle.querySelector('img').onclick = () => window.open(linkInput.value,'_blank');
-          localStorage.setItem('circle'+i+'Link', linkInput.value);
-        }
-        if(fileInput.files[0]){
-          const reader = new FileReader();
-          reader.onload = function(e){
-            circle.querySelector('img').src = e.target.result;
-            localStorage.setItem('circle'+i+'Img', e.target.result);
-          };
-          reader.readAsDataURL(fileInput.files[0]);
-        }
-        alert('تم تحديث البيانات للدائرة '+i);
-      });
-    }
-  </script>
 </body>
 </html>
