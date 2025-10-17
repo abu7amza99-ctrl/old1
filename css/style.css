@@ -10,9 +10,7 @@ body {
   background-attachment: fixed;
 }
 
-/* ----------------------------
-   الشريط العلوي
----------------------------- */
+/* الشريط العلوي */
 header {
   display: flex;
   align-items: center;
@@ -48,9 +46,7 @@ header {
   margin: 0;
 }
 
-/* ----------------------------
-   زر لوحة التحكم
----------------------------- */
+/* زر لوحة التحكم */
 #adminBtn {
   position: absolute;
   left: 20px;
@@ -60,16 +56,9 @@ header {
   border: none;
   cursor: pointer;
 }
+#adminBtn img { width: 40px; height: 40px; }
 
-#adminBtn img {
-  display: block;
-  width: 40px;
-  height: 40px;
-}
-
-/* ----------------------------
-   الشريط الجانبي
----------------------------- */
+/* زر الشريط الجانبي */
 .sidebar-btn {
   position: absolute;
   right: 20px;
@@ -83,11 +72,7 @@ header {
   cursor: pointer;
   box-shadow: 0 2px 5px rgba(0,0,0,0.5);
 }
-
-.sidebar-btn img {
-  width: 100%;
-  height: 100%;
-}
+.sidebar-btn img { width: 100%; height: 100%; }
 
 .sidebar {
   position: fixed;
@@ -103,10 +88,7 @@ header {
   z-index: 100;
   backdrop-filter: blur(6px);
 }
-
-.sidebar.open {
-  right: 0;
-}
+.sidebar.open { right: 0; }
 
 .close-btn {
   position: absolute;
@@ -120,46 +102,20 @@ header {
   font-weight: bold;
 }
 
-.sidebar-menu {
-  list-style: none;
-  padding: 0;
-  margin-top: 60px;
-}
+.sidebar-menu { list-style: none; padding: 0; margin-top: 60px; }
+.sidebar-menu li { margin: 18px 0; }
+.sidebar-menu li a { text-decoration: none; color: #D4AF37; font-size: 22px; transition: color 0.3s; }
+.sidebar-menu li a:hover { color: white; }
 
-.sidebar-menu li {
-  margin: 18px 0;
-}
+/* المحتوى الرئيسي */
+main { padding: 20px; color: #000; text-align: center; }
 
-.sidebar-menu li a {
-  text-decoration: none;
-  color: #D4AF37;
-  font-size: 22px;
-  transition: color 0.3s;
-}
-
-.sidebar-menu li a:hover {
-  color: white;
-}
-
-/* ----------------------------
-   المحتوى الرئيسي
----------------------------- */
-main {
-  padding: 20px;
-  color: #000;
-  text-align: center;
-}
-
-/* ================================
-   تبويب ذهبي للوحة التحكم
-================================ */
+/* مودال لوحة التحكم */
 .admin-modal {
   display: none;
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
   background-color: rgba(212,175,55,0.2);
   backdrop-filter: blur(5px);
   z-index: 9999;
@@ -167,12 +123,12 @@ main {
 }
 
 .admin-modal-content {
-  background-color: rgba(255, 215, 0, 0.2);
-  margin: 50px auto;
-  padding: 20px;
-  border-radius: 15px;
-  max-width: 900px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  background-color: rgba(255,215,0,0.15);
+  margin: 40px auto;
+  padding: 18px;
+  border-radius: 12px;
+  max-width: 980px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
   text-align: center;
 }
 
@@ -181,8 +137,8 @@ main {
   margin: 8px 0;
   padding: 8px;
   width: 80%;
-  max-width: 400px;
-  border-radius: 5px;
+  max-width: 420px;
+  border-radius: 6px;
   border: 1px solid #ccc;
 }
 
@@ -192,80 +148,35 @@ main {
   font-weight: bold;
   cursor: pointer;
 }
+.admin-modal-content button:hover { background-color: #b8962f; }
 
-.admin-modal-content button:hover {
-  background-color: #b8962f;
-}
+.admin-panel { display: none; margin-top: 16px; }
 
-.admin-panel {
-  display: none;
-  margin-top: 20px;
-}
-
-.circle-admin {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-}
-
+/* تنسيقات لوحة تحكم داخل المودال */
+.circle-admin { display: flex; flex-wrap: wrap; justify-content: space-around; gap: 12px; }
 .circle-block {
-  background-color: #fff;
-  border-radius: 10px;
-  padding: 10px;
-  margin: 10px;
-  width: 200px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.2);
-  text-align: left;
+  background: #fff; border-radius: 10px; padding: 12px; width: 220px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); text-align: left;
 }
+.circle-block label { font-weight: bold; display:block; margin-top:8px; }
 
-/* ================================
-   قسم اتصل بنا - الدوائر
-================================ */
-#contactTab {
-  margin-top: 30px;
-  background-color: rgba(212,175,55,0.2);
-  padding: 20px;
-  border-radius: 15px;
-}
+/* قسم اتصل بنا */
+.contact-tab { background-color: rgba(212,175,55,0.2); padding: 20px; border-radius: 15px; margin: 20px auto; max-width: 980px; text-align:center; }
+.contact-tab h2 { color: #D4AF37; margin-bottom: 12px; }
 
-.circle-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 30px;
-  margin-top: 20px;
-}
-
+/* دوائر */
+.circle-container { display:flex; flex-wrap:wrap; justify-content:center; gap:24px; margin-top:14px; }
 .circle {
-  width: 120px;
-  height: 120px;
-  border: 3px solid #000;
-  border-radius: 50%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: transform 0.3s, box-shadow 0.3s;
-  background-color: rgba(255,255,255,0.7);
+  width: 140px; height: 140px; border-radius: 50%; border: 3px solid #000;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  background: rgba(255,255,255,0.85); cursor:pointer; transition: transform .18s, box-shadow .18s;
 }
+.circle:hover { transform: scale(1.06); box-shadow: 0 8px 18px rgba(0,0,0,0.25); }
+.circle img { width: 72px; height:72px; border-radius:50%; object-fit:cover; margin-bottom:6px; }
+.circle-text { font-size: 14px; font-weight:700; color:#000; text-align:center; }
 
-.circle:hover {
-  transform: scale(1.05);
-  box-shadow: 0 5px 10px rgba(0,0,0,0.3);
-}
-
-.circle img {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-bottom: 5px;
-}
-
-.circle-text {
-  font-size: 14px;
-  font-weight: bold;
-  color: #000;
-  text-align: center;
+/* استجابة */
+@media (max-width:700px){
+  .circle { width:110px; height:110px; }
+  .circle img { width:56px; height:56px; }
+  .app-title { font-size: 22px; }
 }
